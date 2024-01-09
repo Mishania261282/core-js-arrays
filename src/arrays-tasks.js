@@ -332,8 +332,17 @@ function selectMany(arr, childrenSelector) {
  *   calculateBalance([ [ 10, 8 ], [ 1, 5 ] ])  => (10 - 8) + (1 - 5) = 2 + -4 = -2
  *   calculateBalance([]) => 0
  */
-function calculateBalance(/* arr */) {
-  throw new Error('Not implemented');
+function calculateBalance(arr) {
+  return (
+    arr
+      .flat(Infinity)
+      .filter((item, index) => index % 2 === 0)
+      .reduce((sum, current) => sum + current) -
+    arr
+      .flat(Infinity)
+      .filter((item, index) => index % 2 !== 0)
+      .reduce((sum, current) => sum + current)
+  );
 }
 
 /**
@@ -348,8 +357,12 @@ function calculateBalance(/* arr */) {
  *    createChunks(['a', 'b', 'c', 'd', 'e'], 2) => [['a', 'b'], ['c', 'd'], ['e']]
  *    createChunks([10, 20, 30, 40, 50], 1) => [[10], [20], [30], [40], [50]]
  */
-function createChunks(/* arr, chunkSize */) {
-  throw new Error('Not implemented');
+function createChunks(arr, chunkSize) {
+  const subarray = [];
+  for (let i = 0; i < Math.ceil(arr.length / chunkSize); i += 1) {
+    subarray[i] = arr.slice(i * chunkSize, i * chunkSize + chunkSize);
+  }
+  return subarray;
 }
 
 /**
@@ -400,8 +413,13 @@ function getElementByIndices(/* arr, indices */) {
  *  getFalsyValuesCount([ -1, 'false', null, 0 ]) => 2
  *  getFalsyValuesCount([ null, undefined, NaN, false, 0, '' ]) => 6
  */
-function getFalsyValuesCount(/* arr */) {
-  throw new Error('Not implemented');
+function getFalsyValuesCount(arr) {
+  let result = 0;
+  const arr1 = arr.map((item) => !!item);
+  for (let i = 0; i < arr1.length; i += 1) {
+    result = arr1[i] ? (result += 0) : (result += 1);
+  }
+  return result;
 }
 
 /**
@@ -437,8 +455,10 @@ function getIdentityMatrix(/* n */) {
  *    getIndicesOfOddNumbers([2, 4, 6, 8, 10]) => []
  *    getIndicesOfOddNumbers([11, 22, 33, 44, 55]) => [0, 2, 4]
  */
-function getIndicesOfOddNumbers(/* numbers */) {
-  throw new Error('Not implemented');
+function getIndicesOfOddNumbers(numbers) {
+  return numbers
+    .map((item, index) => (item % 2 !== 0 ? index : false))
+    .filter((item) => typeof item === 'number');
 }
 
 /**
